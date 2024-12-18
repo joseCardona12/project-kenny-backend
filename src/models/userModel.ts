@@ -36,7 +36,7 @@ export class UserModel extends Model{
     @Column({
         type:DataType.STRING(100),
     })
-    gmail!:string;
+    email!:string;
 
     @Column({
         type:DataType.STRING,

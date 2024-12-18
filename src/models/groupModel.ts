@@ -3,7 +3,7 @@ import {UserModel} from "./userModel";
 import {ProductModel} from "./productModel";
 
 @Table({
-    tableName: "groups",
+    tableName: "groupps",
     timestamps: false
 })
 export class GroupModel extends Model{

@@ -33,4 +33,4 @@ export const sequelize:Sequelize = new Sequelize({
     models: [RoleModel,ActionModel,RoleActionModel,
             UnitModel, LevelModel, PlaceModel, StatusModel, UserModel,
             GroupModel, MedalModel,TaskModel, ProductModel, DocumentModel],
-})
+});

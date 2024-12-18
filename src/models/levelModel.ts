@@ -22,7 +22,7 @@ export class LevelModel extends Model{
     @Column({
         type:DataType.INTEGER
     })
-    range!:number;
+    range_level!:number;
 
     @Column({
         type:DataType.STRING,

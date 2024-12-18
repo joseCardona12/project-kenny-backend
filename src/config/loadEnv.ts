@@ -7,4 +7,5 @@ export const {
     DB_PORT:db_port = "3200",
     DB_USER: db_username = "root",
     DB_PASSWORD: db_password = "root",
+    SECRET= "secret",
 } = process.env;

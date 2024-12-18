@@ -1,32 +1,55 @@
 import {Request, Response} from "express";
-import {UtilApplication} from "../utils/utilApplication";
-import {AuthControllerPort} from "../ports";
+import {UtilApplication} from "@utils/utilApplication";
+import {AuthControllerPort} from "@ports/auth/authControllerPort";
+import {container} from "tsyringe";
+import {AuthService} from "@services/authService";
+import {AuthPort} from "@ports/auth/authPort";
+import {UserModel} from "@models/userModel";
+import jwt from "jsonwebtoken";
+import {SECRET} from "@config/loadEnv";
 
 class AuthController implements AuthControllerPort{
 
-    public async login(req:Request, res:Response):Promise<void> {
-        const {name,phone_number, role_id = 2,level_id = 1, email, password} = req.body;
-        const existsParametersVerify = UtilApplication.verifyExistsParameters(
-            name,
-            phone_number,
-            email,
-            password
-        );
+    public login = async (req:Request, res:Response):Promise<void> => {
+        const {phone_number,password} = req.body;
+        const verifyParameters:boolean = UtilApplication.verifyExistsParameters(phone_number,password);
 
-        if(!existsParametersVerify){
+        if(!verifyParameters){
             res.status(400).json({
-                message: "Error to try login. Is necessary all parameters for login!"
+                message: "Error. Is necessary all params"
             });
-            return;
-        };
+            return ;
+        }
 
-
-
-        console.log(`Exists parameters: ${existsParametersVerify} ${role_id} ${level_id}`);
+        const authService:AuthPort = container.resolve(AuthService);
+        const userFound = await authService.login({
+            phone_number,
+            password,
+        });
+        if(!userFound){
+            res.status(401).json({
+                message:"User not found"
+            });
+        }
+        const tokenGenerate:string = this.generateToken({
+            phone_number,
+            password
+        });
+        res.status(200).json({
+            token: tokenGenerate,
+            user: userFound
+        });
     };
 
-    public async register():Promise<void>   {
+    public register = async():Promise<void> =>   {
         console.log("Register");
+    };
+
+    private generateToken = (user: {
+        phone_number: string,
+        password: string,
+    }):string =>{
+        return jwt.sign(user,SECRET, {expiresIn: "1h"});
     };
 }
 

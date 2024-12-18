@@ -2,6 +2,16 @@
   "name": "backend-project-01",
   "version": "1.0.0",
   "main": "./src/index.ts",
+  "_moduleAliases": {
+    "@utils": "./src/utils",
+    "@controllers": "./src/controllers",
+    "@repositories": "./src/repositories",
+    "@routes": "./src/routes",
+    "@models": "./src/models",
+    "@ports": "./src/ports",
+    "@config": "./src/config",
+    "@services": "./src/services"
+  },
   "scripts": {
     "dev": "nodemon"
   },
@@ -10,7 +20,11 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@types/jsonwebtoken": "^9.0.7",
+    "bcrypt": "^5.1.1",
     "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "module-alias": "^2.2.3",
     "mysql2": "^3.11.5",
     "nodemon": "^3.1.9",
     "sequelize": "^6.37.5",

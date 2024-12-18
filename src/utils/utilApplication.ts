@@ -1,6 +1,5 @@
 import {Express} from "express";
-import "../config/loadEnv";
-import {sequelize} from "../config/db";
+import {sequelize} from "@config/db";
 export class UtilApplication{
 
     public static async startServer(app:Express,port:string):Promise<void>{
@@ -14,4 +13,12 @@ export class UtilApplication{
     public static verifyExistsParameters(...values: (string | number)[]):boolean{
         return values.every(value=>value);
     };
+
+    public static isFalseParameters(phone_number:string | undefined,email:string | undefined):string | undefined{
+
+        if(!phone_number){
+            return email;
+        }
+        return phone_number;
+    }
 }

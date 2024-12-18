@@ -1,3 +1,5 @@
+import "module-alias/register";
+import "@config/container";
 import express, {Express} from "express";
 import {UtilApplication} from "./utils/utilApplication";
 import {router} from "./routes";
