@@ -6,6 +6,22 @@ import {
     db_password,
     db_username
 } from "./loadEnv";
+import {
+    RoleModel,
+    ActionModel,
+    RoleActionModel,
+    UnitModel,
+    LevelModel,
+    PlaceModel,
+    StatusModel,
+    UserModel,
+    GroupModel,
+    MedalModel,
+    TaskModel,
+    ProductModel,
+    DocumentModel
+} from "../models";
+
 
 export const sequelize:Sequelize = new Sequelize({
     dialect: "mysql",
@@ -14,5 +30,7 @@ export const sequelize:Sequelize = new Sequelize({
     username: db_username,
     password: db_password,
     database:db_name,
-    models: [],
+    models: [RoleModel,ActionModel,RoleActionModel,
+            UnitModel, LevelModel, PlaceModel, StatusModel, UserModel,
+            GroupModel, MedalModel,TaskModel, ProductModel, DocumentModel],
 })
