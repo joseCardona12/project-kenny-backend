@@ -13,4 +13,9 @@ export class AuthRepository implements AuthPort{
             }
         })
     }
+
+    public async register(data:Partial<UserModel>):Promise<UserModel | null>{
+        return await UserModel.create(data);
+    }
+
 }

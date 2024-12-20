@@ -1,5 +1,6 @@
 import {Express} from "express";
 import {sequelize} from "@config/db";
+import bcrypt from "bcrypt";
 export class UtilApplication{
 
     public static async startServer(app:Express,port:string):Promise<void>{
@@ -20,5 +21,14 @@ export class UtilApplication{
             return email;
         }
         return phone_number;
+    };
+
+    public static async encrypPassword(password:string):Promise<string>{
+        const salt = await bcrypt.genSalt(10);
+        return await bcrypt.hash(password, salt);
+    };
+
+    public static async verifyPassword(passwordUser:string, passwordSave:string):Promise<boolean>{
+        return await bcrypt.compare(passwordUser, passwordSave);
     }
 }
